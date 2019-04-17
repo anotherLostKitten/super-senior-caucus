@@ -73,6 +73,5 @@ def capitalize(move):
         result += move[0].upper() + move[1:] + " " 
     return result[:-1]
 if __name__ == "__main__":
-    reset()
     app.debug = True
     app.run()
