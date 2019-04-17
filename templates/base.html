@@ -4,52 +4,17 @@
     <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.1/css/foundation.min.css">
     <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.1/css/app.min.css">
     <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.1/css/min.min.css">
-	<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/motion-ui/1.1.1/motion-ui.css">
 
 	<link rel = "stylesheet" href = "{{ url_for('static', filename='style.css')}}">
 	
-    <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/js/vendor/jquery.min.js"></script>
-    <script src = "https://cdnjs.cloudflare.com/ajax/libs/foundation/6.0.1/js/foundation.min.js"></script>
     <!--- This is the webpage title --->
-    <title>{% block title %}William Lu{% endblock %}</title>
+    <title>{% block title %}Bazinga{% endblock %}</title>
   </head>
   <body>
-	<!-- Navbar -->
-    <div id="responsive-menu">
-      <div class="top-bar foundation-5-top-bar">
-		<div class="top-bar-container">
-
-	      <div class="top-bar-left">
-			<ul class="dropdown menu" data-dropdown-menu>
-			  <li class="menu-text">Weather You'll See Pokemon</li>
-			  <li><a href="/">Home</a></li>
-			  {% if last_loc != None %}
-			  <li><a href="/weather/{{ last_loc }}">{{ capitalize(last_loc) }}</a></li>
-			  {% endif %}
-			  {% if last_poke != None %}
-			  <li><a href="/pokeinfo/{{ last_poke }}">{{ capitalize(last_poke) }}</a></li>
-			  {% endif %}
-			</ul>
-	      </div>
-
-		  <!-- search -->
-		</div>
-		<div class="top-bar-right">
-		  <form action="/search" method="GET">
-			<ul class="dropdown menu" data-dropdown-menu>
-			  <li><input type="text" name="q" placeholder="Search"></li>
-			  <li><button type="submit" class="button">Go!</button></li>
-			  <li><a href="/random" class="button">???</a></li>
-			</ul>
-		  </form>
-		</div>
-      </div>
-    </div>
-	<br>
-
 	<div class="grid-x grid-padding-x">
 	  <div class="cell small-0 medium-1 large-1"></div>
 	  <div class="cell auto">
+		<br><br>
 		<!-- flashed messages -->
 		{% for i in get_flashed_messages() %}
 		<div class="callout alert float-center">
@@ -61,14 +26,11 @@
 		CONTENT
 		{% endblock %}
 
-    <hr>
-		<footer> <center>&copy; William Lu</center> </footer>
+		<hr>
+		<footer> <center>&copy; The Computer Interaction Club</center> </footer>
 	  </div>
 	  <div class="cell small-0 medium-1 large-1"></div>
 	</div>
 
-    <script>
-      $(document).foundation()
-    </script>
   </body>
 </html>

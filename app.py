@@ -1,7 +1,3 @@
-# William Lu -- DJPM Theodore "Big T" Peters, Ivan "R." Zhang, Adil "Pickle" Gondal, Imad "The Flip-Flop" Belkebir
-# SoftDev1 pd07
-# P #01: weather there are pokemon??
-# 2018-11-2
 from urllib import request, parse
 import json
 import sqlite3
@@ -16,13 +12,13 @@ app.secret_key = urandom(32)
 
 @app.route("/")
 def home():
-    render_template("men.html", cand = [{name:"uddin"},{name:"peters"},{name:"mcbarron"}])
+    return render_template("men.html", cand = [{"name":"uddin"},{"name":"peters"},{"name":"mcbarron"}],capitalize = capitalize)
 @app.route("/vote/<men>")
 def vote(men):
     ip = request.remote_addr
     if not vore(ip,men):
         flash("Vote updated.")
-    return render_template("results.html",stats=vore_count())
+    return render_template("res.html",stats=vore_count(),capitalize = capitalize)
 def vore(ip,cand):
     db=sqlite3.connect("votes.db")
     squul=db.cursor()
@@ -49,10 +45,22 @@ def vore_count():
     print(vd)
     return vd
 def reset():
-    db.sqlite3.connect("votes.db")
+    db=sqlite3.connect("votes.db")
     squul=db.cursor()
     squul.execute("DROP TABLE IF EXISTS votes;")
     squul.execute("CREATE TABLE votes (ip TEXT, vote TEXT);")
+def capitalize(move):
+    '''capitalized series of words seperated by either hyphens or spaces'''
+    seperate = move.split(" ")
+    result = ""
+    for move in seperate:
+        result += move.capitalize() + " "
+    seperate = result[:-1].split("-")
+    result = ""
+    for move in seperate:
+        result += move[0].upper() + move[1:] + " " 
+    return result[:-1]
 if __name__ == "__main__":
+    reset()
     app.debug = True
     app.run()
