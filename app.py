@@ -18,7 +18,13 @@ def vote(men):
     ip = request.remote_addr
     if not vore(ip,men):
         flash("Vote updated.")
-    return render_template("res.html",stats=vore_count(),capitalize = capitalize)
+    return redirect("/results")
+@app.route("/results")
+def respag():
+    if has_vore(request.remote_addr):
+        return render_template("res.html",stats=vore_count(),capitalize = capitalize)
+    else:
+        return redirect("/")
 def vore(ip,cand):
     db=sqlite3.connect("votes.db")
     squul=db.cursor()
@@ -29,6 +35,12 @@ def vore(ip,cand):
         squul.execute("UPDATE votes SET vote = ? WHERE ip = ?;",(cand,ip))
         b = False
     db.commit()
+    db.close()
+    return b
+def has_vore(ip):
+    db=sqlite3.connect("votes.db")
+    squul=db.cursor()
+    b = squul.execute("SELECT * FROM votes WHERE ip = ?",(ip,)).fetchone()!=None
     db.close()
     return b
 def vore_count():
@@ -42,7 +54,7 @@ def vore_count():
             vd[i[0]]+=1
         else:
             vd[i[0]]=1
-    print(vd)
+    vd=sorted([(k,vd[k])for k in list(vd)],key=lambda d:d[1])
     return vd
 def reset():
     db=sqlite3.connect("votes.db")

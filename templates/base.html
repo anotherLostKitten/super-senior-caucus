@@ -14,7 +14,12 @@
 	<div class="grid-x grid-padding-x">
 	  <div class="cell small-0 medium-1 large-1"></div>
 	  <div class="cell auto">
-		<br><br>
+		<br>
+
+		{% block content %}
+		CONTENT
+		{% endblock %}
+		<br>
 		<!-- flashed messages -->
 		{% for i in get_flashed_messages() %}
 		<div class="callout alert float-center">
@@ -22,12 +27,6 @@
 		</div>
 		{% endfor %}
 
-		{% block content %}
-		CONTENT
-		{% endblock %}
-
-		<hr>
-		<footer> <center>&copy; The Computer Interaction Club</center> </footer>
 	  </div>
 	  <div class="cell small-0 medium-1 large-1"></div>
 	</div>
