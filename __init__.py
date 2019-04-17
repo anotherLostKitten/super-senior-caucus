@@ -1,7 +1,7 @@
 from urllib import request, parse
 import json
 import sqlite3
-from os import urandom
+from os import urandom,path
 from random import randint
 
 from flask import Flask, render_template, request, flash, redirect, url_for, make_response, Request
@@ -9,6 +9,8 @@ from flask import Flask, render_template, request, flash, redirect, url_for, mak
 app = Flask(__name__)
 
 app.secret_key = urandom(32)
+
+DIR = '/var/www/superseniorcaucus/superseniorcaucus/'
 
 @app.route("/")
 def home():
@@ -26,7 +28,7 @@ def respag():
     else:
         return redirect("/")
 def vore(ip,cand):
-    db=sqlite3.connect("votes.db")
+    db=sqlite3.connect(DIR+"votes.db")
     squul=db.cursor()
     b = True
     if squul.execute("SELECT * FROM votes WHERE ip = ?",(ip,)).fetchone()==None:
@@ -38,13 +40,13 @@ def vore(ip,cand):
     db.close()
     return b
 def has_vore(ip):
-    db=sqlite3.connect("votes.db")
+    db=sqlite3.connect(DIR+"votes.db")
     squul=db.cursor()
     b = squul.execute("SELECT * FROM votes WHERE ip = ?",(ip,)).fetchone()!=None
     db.close()
     return b
 def vore_count():
-    db=sqlite3.connect("votes.db")
+    db=sqlite3.connect(DIR+"votes.db")
     squul=db.cursor()
     vts = squul.execute("SELECT vote FROM votes;").fetchall()
     db.close()
@@ -57,7 +59,7 @@ def vore_count():
     vd=sorted([(k,vd[k])for k in list(vd)],key=lambda d:d[1])
     return vd
 def reset():
-    db=sqlite3.connect("votes.db")
+    db=sqlite3.connect(DIR+"votes.db")
     squul=db.cursor()
     squul.execute("DROP TABLE IF EXISTS votes;")
     squul.execute("CREATE TABLE votes (ip TEXT, vote TEXT);")
