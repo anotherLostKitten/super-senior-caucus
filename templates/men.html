@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Vote for Super Senior Caucus{% endblock %}
+{% block content %}
+
+<div class="grid-container" style="background-color: #f8f9fa; border-radius: 10px; border: 5px solid black;">
+  <h1 style="align:center"><strong>Vote:</strong></h1>
+  <div class="grid-x grid-padding-x small-up-3 medium-up-3">
+    {% for p in cand %}
+    <div class="cell pokehref">
+	  <a href="/vote/{{p['name']}}">
+		<div class="card" style="border-radius: 5px; border: 3px solid black">
+		  <img src="/satic/{{p['name']}}.png" width="100%">
+		  <div class="card-divider" style="background-color:white;text-align:center;color:black;">
+			<h4 style="text-align:center;">{{capitalize(p['name'])}}</h4>
+		  </div>
+		</div>
+	  </a>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+{% endblock %}

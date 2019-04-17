@@ -1,0 +1,25 @@
+img{
+	image-rendering: crisp-edges;
+}
+body{
+	font-family:"Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace";
+}
+h1{
+	font-family:"Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace";
+	font-weight:bold;
+}
+h3{
+	font-family:"Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace";
+	font-weight:bold;
+}
+h4{
+	font-family:"Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace";
+	font-weight:bold;
+}
+.pokehref{
+	transform: scale(0.9, 0.9);
+}
+
+.pokehref:hover{
+	transform: scale(1.0, 1.0);
+}
